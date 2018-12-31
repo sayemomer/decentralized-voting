@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import auth0Client from '../Auth';
 import {Link} from 'react-router-dom';
+import Menu from '../StyleComponent/Menu';
 
 const styles = {
   root: {
@@ -23,6 +24,11 @@ const styles = {
   },
 };
 
+const linkStyle={
+  textDecoration:'none',
+  color:'white'
+}
+
 function ButtonAppBar(props) {
 
   const { classes,signOut } = props;
@@ -33,7 +39,7 @@ function ButtonAppBar(props) {
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Voting
           </Typography>
-          <Link to="/" >
+          <Link to="/" style={linkStyle}>
           <Button color="inherit">Home</Button>
           </Link> 
           {
@@ -43,14 +49,16 @@ function ButtonAppBar(props) {
           {
             auth0Client.isAuthenticated() &&
             <div>
-                <label>{auth0Client.getProfile().name}</label>
-                <Link to='/mypolls'>
+                <Link to='/mypolls'style={linkStyle}>
                 <Button color="inherit" >My Poll</Button>
                 </Link>
-                <Link to='/newpoll'>
+                <Link to='/newpoll' style={linkStyle}>
                 <Button color="inherit" >New Poll</Button>
-                </Link>  
-                <Button color="inherit" onClick={signOut}>Logout</Button>
+                </Link>
+                <Menu 
+                signOut={signOut}
+                name={auth0Client.getProfile().name}   
+                />
             </div>
           }   
         </Toolbar>

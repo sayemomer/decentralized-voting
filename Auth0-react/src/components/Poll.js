@@ -17,6 +17,7 @@ const styles = theme => ({
       display: 'none',
     },
   });
+  
 
 
 class Poll extends Component {
@@ -38,11 +39,9 @@ class Poll extends Component {
 
     refreshQuestion(){
          const { match: { params } } = this.props;
-        // axios.get(`http://localhost:8081/${params.questionId}`)
-        // .then((response)=> this.setState({ question: [response.data]  }))
-        // .catch((error)=>console.log(error)) 
-
-        this.setState({poll:[params.poll]});
+        axios.get(`http://localhost:8081/${params.title}`)
+        .then((response)=> this.setState({ polls: [response.data]  }))
+        .catch((error)=>console.log(error))
     }
 
     // async handleAnswer(answer){
@@ -91,14 +90,21 @@ class Poll extends Component {
     return (
         <div >
         <h1>{this.state.poll}</h1>
-        <Select/>
+        <Select
+        options={this.state.poll[0].options}
+        />
         <Button variant="contained" >
         Submit 
         </Button>
         <Button variant="contained" >
         Share on Twitter 
         </Button>
-        < Doughnut data={data} />
+
+        < Doughnut
+         data={data}
+         width={200}
+	     height={50} 
+         />
 
         </div>
     );

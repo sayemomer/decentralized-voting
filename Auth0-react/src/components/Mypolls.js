@@ -8,6 +8,7 @@ import Divider from '@material-ui/core/Divider';
 import { Component } from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import auth0Client from '../Auth';
 
 const styles = theme => ({
   root: {
@@ -23,6 +24,10 @@ const styles = theme => ({
 
 });
 
+const linkStyle={
+  textDecoration:'none'
+}
+
 class Polls extends Component {
 
     constructor(props){
@@ -37,12 +42,9 @@ class Polls extends Component {
 
     componentDidMount(){
 
-        // axios.get('http://localhost:8081/')
-        // .then((response)=> this.setState({ question: this.state.question.concat(response.data)  }))
-        // .catch((error)=>console.log(error))
-    
-        this.setState({ polls : ["Inbox","Trash"] });
-        
+        axios.get(`http://localhost:8081/${auth0Client.getProfile().name}`)
+        .then((response)=> this.setState({ polls: this.state.polls.concat(response.data)  }))
+        .catch((error)=>console.log(error))  
       }
 
      render(){
@@ -51,9 +53,9 @@ class Polls extends Component {
 
         const polls = this.state.polls.map((p)=>(
             <div>
-               <Link to={`polls/${p}`}>
+               <Link to={`polls/${p.tile}`} style={linkStyle}>
                 <ListItem button divider>
-                  <ListItemText primary={p} className={classes.textStyle}/>
+                  <ListItemText primary={p.title} className={classes.textStyle}/>
                 </ListItem>
               </Link>
               <Divider />
