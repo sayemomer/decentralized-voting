@@ -54,7 +54,7 @@ class Polls extends Component {
 
         const polls = this.state.polls.map((p)=>(
             <div>
-               <Link to={`polls/${p.title}`} style={linkStyle}>
+               <Link to={`/poll/${p._id}`} style={linkStyle}>
                 <ListItem button divider>
                   <ListItemText primary={p.title} className={classes.textStyle}/>
                 </ListItem>

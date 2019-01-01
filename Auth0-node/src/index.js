@@ -21,7 +21,9 @@ var polls = new Schema({
     username:String,
     userId:String,
     title:String,
-    options:[]
+    options:[],
+    vote:[],
+    voted:Boolean
 
   });
 
@@ -50,10 +52,9 @@ app.get('/:name',async (req,res) => {
 });
 
 
-app.get('/poll/:title',async (req,res) => {
+app.get('/poll/:id',async (req,res) => {
 
-    
-    let pollDetails = await Polls.find({title:req.params.title});
+    let pollDetails =  await Polls.find({_id:req.params.id});
     res.send(pollDetails);
 });
 
@@ -75,14 +76,16 @@ const checkJwt = jwt({
 
 app.post('/',checkJwt,(req,res) => {
 
-    const {username,title,options} = req.body;
+    const {username,title,options,vote,voted} = req.body;
     const newPoll = {
         
         _id: randomstring.generate(7),
         username,
         userId:randomstring.generate(7),
         title,
-        options
+        options,
+        vote,
+        voted
 
     };
     var poll = new Polls(newPoll);
@@ -91,18 +94,15 @@ app.post('/',checkJwt,(req,res) => {
 });
 
 
-app.post('/answer/:id',checkJwt,(req,res) => {
-
-    const {answer} = req.body;
-    const ques = question.filter((q) => ( q.id === parseInt(req.params.id) ));
-    if( ques.length > 1) return res.status(500).send();
-    if( ques.length === 0) return res.send(404).send();
-
-    ques[0].answer.push({
-        answer,
-        author:req.user.name
+app.post('/poll/:id',checkJwt,async(req,res) => {
+    
+    const {vote,voted} = req.body;
+    let pollDetails =  await Polls.findByIdAndUpdate({_id:req.params.id},{
+        vote,
+        voted
+        
     });
-    res.status(200).send();
+    res.send(pollDetails);
 });
 
 

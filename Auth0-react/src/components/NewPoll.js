@@ -80,18 +80,26 @@ class NewPoll extends Component {
     
     async handleSubmit(){
 
+      let options = this.state.options.split(" ");
+
+      var vote=[];
+      for( var i=0 ;i<options.length;i++){
+          vote[i]=0;
+      }
 
       await axios.post('http://localhost:8081',
         {
             username:auth0Client.getProfile().name,
             title:this.state.title,
-            options:this.state.options.split(" ")
+            options,
+            vote,
+            voted:false
         },
         {
             headers: { 'Authorization': `Bearer ${auth0Client.getIdToken()}` }
         }
         );
-        this.props.history.push(`/polls/${this.state.title}`);
+        this.props.history.push('/');
     }
 
 

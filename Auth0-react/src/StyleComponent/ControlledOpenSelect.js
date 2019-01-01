@@ -20,7 +20,7 @@ const styles = theme => ({
 
 class ControlledOpenSelect extends React.Component {
   state = {
-    age: '',
+    poll: '',
     open: false,
   };
 
@@ -36,11 +36,15 @@ class ControlledOpenSelect extends React.Component {
     this.setState({ open: true });
   };
 
+  handleSubmit = () => {
+    this.props.onVote(this.state.poll);
+  }
+
   render() {
     const { classes } = this.props;
 
   const options=  this.props.options.map((op)=>(
-    <MenuItem value={10} >{op}</MenuItem>           
+          <MenuItem value={op} >{op}</MenuItem>     
     ));
 
     return (
@@ -54,16 +58,22 @@ class ControlledOpenSelect extends React.Component {
             open={this.state.open}
             onClose={this.handleClose}
             onOpen={this.handleOpen}
-            value={this.state.age}
+            value={this.state.poll}
             onChange={this.handleChange}
             inputProps={{
-              name: 'age',
+              name: 'poll',
               id: 'demo-controlled-open-select',
             }}
           >
-            {options}
+
+          {options}
+            
           
           </Select>
+
+          <Button variant="contained" onClick={this.handleSubmit}>
+            Vote!
+        </Button>
         </FormControl>
       </form>
     );
