@@ -8,6 +8,7 @@ import Divider from '@material-ui/core/Divider';
 import { Component } from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import ProgressBar from '../StyleComponent/ProgressBar';
 
 const styles = theme => ({
   root: {
@@ -34,7 +35,8 @@ class Polls extends Component {
         super(props);
     
         this.state={
-          polls:[]
+          polls:[],
+          loaded:false
         }
        
         
@@ -43,33 +45,44 @@ class Polls extends Component {
     componentDidMount(){
 
         axios.get('http://localhost:8081/')
-        .then((response)=> this.setState({ polls: this.state.polls.concat(response.data)  }))
+        .then((response)=> this.setState({
+
+           polls: this.state.polls.concat(response.data),
+           loaded:true
+
+          }))
         .catch((error)=>console.log(error))
-        
       }
 
      render(){
 
         const { classes } = this.props;
-
         const polls = this.state.polls.map((p)=>(
+
             <div>
-               <Link to={`/poll/${p._id}`} style={linkStyle}>
+              <Link to={`/poll/${p._id}`} style={linkStyle}>
                 <ListItem button divider>
-                  <ListItemText primary={p.title} className={classes.textStyle}/>
+                <ListItemText primary={p.title} className={classes.textStyle}/>
                 </ListItem>
               </Link>
               <Divider />
             </div>
+
           ));
 
+
         return (
-            <List component="nav" className={classes.root}>
-            <h1>Voting</h1>
-            <h3>Below are polls hosted by fcc-voting.</h3>
-            <h3>Select a poll to see the results and vote, or sign-in to make a new poll.</h3>
-             {polls}
-            </List>
+
+        <List component="nav" className={classes.root}>
+          <h1>Voting</h1>
+          <h3>Below are polls hosted by fcc-voting.</h3>
+          <h3>Select a poll to see the results and vote, or sign-in to make a new poll.</h3> 
+          {
+            this.state.loaded === false &&
+            <ProgressBar/> 
+          }
+          {polls}  
+        </List>
           );
 
      }
@@ -77,8 +90,10 @@ class Polls extends Component {
 
 }
 
+
 Polls.propTypes = {
   classes: PropTypes.object.isRequired,
 };
+
 
 export default withStyles(styles)(Polls);

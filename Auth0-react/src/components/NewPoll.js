@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
+import ProgressLine from '../StyleComponent/ProgressLine'
 
 
 const styles = theme => ({
@@ -55,7 +56,8 @@ class NewPoll extends Component {
 
         this.state={
             title:'',
-            options:[]
+            options:[],
+            submitted:false
         }
 
         this.handleSubmit=this.handleSubmit.bind(this);
@@ -79,6 +81,8 @@ class NewPoll extends Component {
   }
     
     async handleSubmit(){
+
+      this.setState({ submitted: "Submitting"});
 
       let options = this.state.options.split(" ");
 
@@ -143,6 +147,10 @@ class NewPoll extends Component {
         <Button variant="contained" onClick={this.handleSubmit}>
         Make!
         </Button>
+        {
+          this.state.submitted === "Submitting" &&
+          <ProgressLine/>
+        }
         </form>
         
       </Paper>

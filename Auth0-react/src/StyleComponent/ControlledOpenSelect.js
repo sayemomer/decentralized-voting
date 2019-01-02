@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
+import PopOverButton from './PopOver'
 
 const styles = theme => ({
   button: {
@@ -71,9 +72,8 @@ class ControlledOpenSelect extends React.Component {
           
           </Select>
 
-          <Button variant="contained" onClick={this.handleSubmit}>
-            Vote!
-        </Button>
+          <PopOverButton handleSubmit={this.handleSubmit}/>
+
         </FormControl>
       </form>
     );

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
-import SubmitAnswer from './SubmitAnswer';
 import auth0Client from '../Auth';
 import Select from '../StyleComponent/ControlledOpenSelect';
 import PropTypes from 'prop-types';
@@ -10,6 +9,7 @@ import {withRouter} from 'react-router-dom';
 import {colors} from '../StyleComponent/color';
 import {FacebookShareButton} from 'react-share';
 import {FacebookIcon} from 'react-share';
+import Alert from '../StyleComponent/Alert'
 var _ = require('lodash');
 
 
@@ -31,7 +31,8 @@ class Poll extends Component {
         super(props);
 
         this.state={
-            poll:[]
+            poll:[],
+            alert:false
         }
 
         this.onVote=this.onVote.bind(this);
@@ -61,7 +62,7 @@ class Poll extends Component {
         const alreadyVoted = _.findIndex(voted[0],{casted : `${user}`});
 
         if(alreadyVoted >= 1){
-            window.alert("You already voted!");
+            this.setState({alert:true})
         }else{
             let index =options[0].indexOf(vote);
 
@@ -164,6 +165,10 @@ class Poll extends Component {
 
     return (
         <div >
+            {
+                this.state.alert &&
+                <Alert/>
+            }
             {poll}
         </div>
     );

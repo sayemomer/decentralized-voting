@@ -9,6 +9,7 @@ import { Component } from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import auth0Client from '../Auth';
+import ProgressBar from '../StyleComponent/ProgressBar';
 
 const styles = theme => ({
   root: {
@@ -34,7 +35,8 @@ class Polls extends Component {
         super(props);
     
         this.state={
-          polls:[]
+          polls:[],
+          loaded:false
         }
        
         
@@ -43,7 +45,12 @@ class Polls extends Component {
     componentDidMount(){
 
         axios.get(`http://localhost:8081/${auth0Client.getProfile().name}`)
-        .then((response)=> this.setState({ polls: this.state.polls.concat(response.data)  }))
+        .then((response)=> this.setState({
+
+           polls: this.state.polls.concat(response.data),
+           loaded:true
+
+          }))
         .catch((error)=>console.log(error))  
       }
 
@@ -67,6 +74,10 @@ class Polls extends Component {
             <h1>Voting</h1>
             <h3>Below are polls you own.</h3>
             <h3>Select a poll to see the results and vote,<Link to='/newpoll'>or make a new poll!</Link> </h3>
+            {
+            this.state.loaded === false &&
+            <ProgressBar/> 
+            }
              {polls}
             </List>
           );
