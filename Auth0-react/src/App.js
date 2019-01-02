@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import {Route,withRouter} from 'react-router-dom';
 import Polls from './components/Polls';
 import poll from './components/Poll';
@@ -41,7 +40,7 @@ class App extends Component {
       <div>
         <Navbar/>
         <Route exact path='/' component={Polls}/>
-        <Route exact path='/poll/:id' component={poll}/>
+        <Route exact path='/poll/:id' component={poll} checkingSession={this.state.checkingSession}/>
         <Route exact path='/callback' component={CallBack}/>
         <SecuredRoute path='/mypolls' component={MyPolls} checkingSession={this.state.checkingSession}/>
         <SecuredRoute path='/newpoll' component={NewPoll} checkingSession={this.state.checkingSession}/>

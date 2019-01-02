@@ -93,7 +93,7 @@ class NewPoll extends Component {
             title:this.state.title,
             options,
             vote,
-            voted:false
+            voted:{casted:"no"}
         },
         {
             headers: { 'Authorization': `Bearer ${auth0Client.getIdToken()}` }

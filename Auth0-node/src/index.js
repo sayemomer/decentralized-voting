@@ -23,7 +23,7 @@ var polls = new Schema({
     title:String,
     options:[],
     vote:[],
-    voted:Boolean
+    voted:[]
 
   });
 
@@ -98,6 +98,7 @@ app.post('/poll/:id',checkJwt,async(req,res) => {
     
     const {vote,voted} = req.body;
     let pollDetails =  await Polls.findByIdAndUpdate({_id:req.params.id},{
+
         vote,
         voted
         
@@ -106,7 +107,16 @@ app.post('/poll/:id',checkJwt,async(req,res) => {
 });
 
 
-app.listen(8081,() => {
+app.delete('/delete/:id',async(req,res) => {
     
+     await Polls.findByIdAndRemove({_id:req.params.id});
+     res.status(200).send(); 
+});
+
+
+
+
+app.listen(8081,() => {
+
     console.log("listening on port 8081");
 })
