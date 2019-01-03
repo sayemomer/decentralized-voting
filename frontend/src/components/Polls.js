@@ -9,15 +9,18 @@ import { Component } from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import ProgressBar from '../StyleComponent/ProgressBar';
+import Paper from '@material-ui/core/Paper';
+
+const background = {
+  width: '90%',
+  backgroundColor: '#EBF2EA',
+  marginTop:'10px',
+  marginLeft:'5%',
+  height:'680px'
+}
 
 const styles = theme => ({
-  root: {
-    width: '100%',
-    maxWidth: '460px',
-    backgroundColor: theme.palette.background.paper,
-    marginTop:'10px',
-    left: '30%'
-  },
+  
   textStyle:{
     textAlign:'center'
   }
@@ -27,6 +30,15 @@ const styles = theme => ({
 
 const linkStyle={
   textDecoration:'none'
+}
+
+const textStyle={
+  width:'50%',
+  left:'25%'
+}
+
+const intro={
+  marginLeft:'30%'
 }
 
 class Polls extends Component {
@@ -61,28 +73,34 @@ class Polls extends Component {
 
             <div>
               <Link to={`/poll/${p._id}`} style={linkStyle}>
-                <ListItem button divider>
-                <ListItemText primary={p.title} className={classes.textStyle}/>
+                <ListItem button divider >
+                <ListItemText primary={p.title} className={classes.textStyle} />
                 </ListItem>
               </Link>
-              <Divider />
+              <Divider /> 
             </div>
 
           ));
 
 
         return (
-
-        <List component="nav" className={classes.root}>
-          <h1>Voting</h1>
-          <h3>Below are polls hosted by fcc-voting.</h3>
-          <h3>Select a poll to see the results and vote, or sign-in to make a new poll.</h3> 
+            <div  >
+            <Paper  elevation={1} style={background}>
+            <div style={intro}>
+            <h2>Below are polls hosted by fcc-voting.</h2>
+            <h3>Select a poll to see the results and vote, or sign-in to make a new poll.</h3>
+            </div> 
+          <List component="nav" style={textStyle}  >
           {
             this.state.loaded === false &&
             <ProgressBar/> 
           }
           {polls}  
         </List>
+        </Paper>
+
+            </div>
+
           );
 
      }

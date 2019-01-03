@@ -36,11 +36,11 @@ const styles = theme => ({
   });
 
   const background = {
-    backgroundColor:'#ebebe0',
-    marginTop:'20px',
-    marginLeft:'10%',
-    width:'80%',
-    height:'450px'
+    width: '90%',
+    backgroundColor: '#EBF2EA',
+    marginTop:'10px',
+    marginLeft:'5%',
+    height:'680px'
   }
 
   const formStyle={

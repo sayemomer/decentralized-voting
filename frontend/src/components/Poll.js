@@ -11,8 +11,39 @@ import {FacebookShareButton,TwitterShareButton} from 'react-share';
 import {FacebookIcon,TwitterIcon} from 'react-share';
 import Alert from '../StyleComponent/Alert';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Paper from '@material-ui/core/Paper';
 var _ = require('lodash');
 
+
+const background = {
+    width: '90%',
+    backgroundColor: '#EBF2EA',
+    marginTop:'10px',
+    marginLeft:'5%',
+    height:'680px',
+    display:'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around'
+  }
+
+
+  const icons={
+     width:'100px',
+     height:'100px',
+     display:'flex',
+     flexDirection: 'row',
+     justifyContent: 'space-around',
+  }
+
+const elementOne = {
+    width:'30%'
+}
+
+const elementTwo = {
+    width:'40%'
+
+}
 
 
 const styles = theme => ({
@@ -102,17 +133,13 @@ class Poll extends Component {
         this.props.history.push('/');
     }
 
-    getUser =  () =>{
+    getUser = () =>{
 
         if( typeof auth0Client.getProfile() === "undefined" ){
             return ;
         }
          return auth0Client.getProfile().name;
     }
-
-    triggerChildAlert(){
-        this.refs.child.handleOpen();
-    } 
 
   render() {
 
@@ -139,49 +166,59 @@ class Poll extends Component {
     console.log(this.getUser());
     
     const poll = this.state.poll.map((p)=>(
-            <div>
+        
+            <Paper  elevation={1} style={background}>
+                
+                <div style={elementOne}>
                 <h1>{p.title}</h1>
                 <Select
                 options={p.options}
                 onVote={this.onVote}
                 />
 
+                < div style={icons}>
                 <FacebookShareButton
-                url={shareUrl}   
+                url={shareUrl}
+      
                 >
                 <FacebookIcon
                   size={52}
                   round={true}
                   />
                 </FacebookShareButton>
-
                 <TwitterShareButton
                 url={shareUrl}
+            
                 >
                     <TwitterIcon
                     size={52}
                     round={true}
                     />
                 </TwitterShareButton>
+                </div>
+ 
 
+                </div>
                 
+            <div style={elementTwo}>
                 < Doughnut
                 data={data[0]}
                 width={200}
-                height={50} 
-                /> 
+                height={150}
+                />
+                 
                 {
             this.getUser() === user[0] &&
                 
             <Button variant="contained" color="secondary" style={deleteButton} onClick={this.handleDelete} >
                 Delete
                 <DeleteIcon  />
-                </Button>
+            </Button>
 
                 }
-
-                
             </div>
+            
+            </Paper>
       ));
 
     const { classes } = this.props;
@@ -192,8 +229,7 @@ class Poll extends Component {
                 this.state.alert &&
                     <Alert
                     open={this.state.alert}
-                    />
-                
+                    />  
             }
             {poll}
         </div>

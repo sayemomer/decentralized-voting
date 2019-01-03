@@ -10,15 +10,10 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import auth0Client from '../Auth';
 import ProgressBar from '../StyleComponent/ProgressBar';
+import Paper from '@material-ui/core/Paper';
 
 const styles = theme => ({
-  root: {
-    width: '100%',
-    maxWidth: '460px',
-    backgroundColor: theme.palette.background.paper,
-    marginTop:'10px',
-    left: '30%'
-  },
+  
   textStyle:{
     textAlign:'center'
   }
@@ -27,6 +22,23 @@ const styles = theme => ({
 
 const linkStyle={
   textDecoration:'none'
+}
+
+const textStyle={
+  width:'50%',
+  left:'25%'
+}
+
+const intro={
+  marginLeft:'30%',
+}
+
+const background = {
+  width: '90%',
+  backgroundColor: '#EBF2EA',
+  marginTop:'10px',
+  marginLeft:'5%',
+  height:'680px'
 }
 
 class Polls extends Component {
@@ -70,16 +82,23 @@ class Polls extends Component {
           ));
 
         return (
-            <List component="nav" className={classes.root}>
-            <h1>Voting</h1>
+          <div>
+           <Paper  elevation={1} style={background}>
+            <div style={intro}>
             <h3>Below are polls you own.</h3>
             <h3>Select a poll to see the results and vote,<Link to='/newpoll'>or make a new poll!</Link> </h3>
+            </div>
+            <List component="nav" style={textStyle} >
             {
             this.state.loaded === false &&
             <ProgressBar/> 
             }
              {polls}
             </List>
+            </Paper>
+
+          </div>
+            
           );
 
      }

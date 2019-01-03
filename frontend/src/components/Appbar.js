@@ -10,7 +10,15 @@ import MenuIcon from '@material-ui/icons/Menu';
 import auth0Client from '../Auth';
 import {Link} from 'react-router-dom';
 import Menu from '../StyleComponent/Menu';
+import { createMuiTheme } from '@material-ui/core/styles';
 
+
+const appbar={
+  backgroundColor:'#80ADD7',
+  width:'90%',
+  marginLeft:'5%',
+  height:'80px'
+}
 
 const styles = {
   root: {
@@ -36,7 +44,7 @@ function ButtonAppBar(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" style={appbar}>
         <Toolbar>
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Voting
