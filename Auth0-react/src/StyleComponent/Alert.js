@@ -13,24 +13,26 @@ function Transition(props) {
 
 class AlertDialogSlide extends React.Component {
   state = {
-    open: false,
+    open: true
   };
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
+  componentWillMount(){
+    this.handleOpen();
+  }
+
+  handleOpen = () => {
+    this.setState({ open : true })
+  }
 
   handleClose = () => {
     this.setState({ open: false });
   };
 
   render() {
+
     return (
-      <div>
-        <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-          Slide in alert dialog
-        </Button>
-        <Dialog
+
+          <Dialog
           open={this.state.open}
           TransitionComponent={Transition}
           keepMounted
@@ -39,12 +41,11 @@ class AlertDialogSlide extends React.Component {
           aria-describedby="alert-dialog-slide-description"
         >
           <DialogTitle id="alert-dialog-slide-title">
-            {"Use Google's location service?"}
+            {"Already Voted ?"}
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">
-              Let Google help apps determine location. This means sending anonymous location data to
-              Google, even when no apps are running.
+              Leave the poll if voted or signin.
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -53,7 +54,6 @@ class AlertDialogSlide extends React.Component {
             </Button>
           </DialogActions>
         </Dialog>
-      </div>
     );
   }
 }

@@ -7,9 +7,10 @@ import PropTypes from 'prop-types';
 import {Doughnut} from 'react-chartjs-2';
 import {withRouter} from 'react-router-dom';
 import {colors} from '../StyleComponent/color';
-import {FacebookShareButton} from 'react-share';
-import {FacebookIcon} from 'react-share';
-import Alert from '../StyleComponent/Alert'
+import {FacebookShareButton,TwitterShareButton} from 'react-share';
+import {FacebookIcon,TwitterIcon} from 'react-share';
+import Alert from '../StyleComponent/Alert';
+import DeleteIcon from '@material-ui/icons/Delete';
 var _ = require('lodash');
 
 
@@ -22,6 +23,11 @@ const styles = theme => ({
       display: 'none',
     },
   });
+
+  const deleteButton= {
+      width:'20%',
+      marginLeft:'40%'
+  }
   
 
 
@@ -104,7 +110,9 @@ class Poll extends Component {
          return auth0Client.getProfile().name;
     }
 
-    
+    triggerChildAlert(){
+        this.refs.child.handleOpen();
+    } 
 
   render() {
 
@@ -137,27 +145,42 @@ class Poll extends Component {
                 options={p.options}
                 onVote={this.onVote}
                 />
+
                 <FacebookShareButton
                 url={shareUrl}   
                 >
                 <FacebookIcon
-                  size={32}
-                  round={false} 
+                  size={52}
+                  round={true}
                   />
                 </FacebookShareButton>
-                {
-            this.getUser() === user[0] &&
-                
-            <Button variant="contained"  onClick={this.handleDelete} >
-            Delete this poll 
-            </Button>
 
-                }
+                <TwitterShareButton
+                url={shareUrl}
+                >
+                    <TwitterIcon
+                    size={52}
+                    round={true}
+                    />
+                </TwitterShareButton>
+
+                
                 < Doughnut
                 data={data[0]}
                 width={200}
                 height={50} 
                 /> 
+                {
+            this.getUser() === user[0] &&
+                
+            <Button variant="contained" color="secondary" style={deleteButton} onClick={this.handleDelete} >
+                Delete
+                <DeleteIcon  />
+                </Button>
+
+                }
+
+                
             </div>
       ));
 
@@ -167,7 +190,10 @@ class Poll extends Component {
         <div >
             {
                 this.state.alert &&
-                <Alert/>
+                    <Alert
+                    open={this.state.alert}
+                    />
+                
             }
             {poll}
         </div>

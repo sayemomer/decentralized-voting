@@ -4,12 +4,13 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import toRenderProps from 'recompose/toRenderProps';
 import withState from 'recompose/withState';
+import Avatar from '@material-ui/core/Avatar';
 
 const WithState = toRenderProps(withState('anchorEl', 'updateAnchorEl', null));
 
 function RenderPropsMenu(props) {
 
-    const { signOut,name } = props;
+    const { signOut,name,picture } = props;
   return (
     <WithState>
       {({ anchorEl, updateAnchorEl }) => {
@@ -20,6 +21,7 @@ function RenderPropsMenu(props) {
 
         return (
           <React.Fragment>
+            
             <Button
               aria-owns={open ? 'render-props-menu' : undefined}
               aria-haspopup="true"
@@ -28,6 +30,7 @@ function RenderPropsMenu(props) {
               }}
             >
               {name}
+              <Avatar alt="Profile Picture" src={picture} />
             </Button>
             <Menu id="render-props-menu" anchorEl={anchorEl} open={open} onClose={handleClose}>
               <MenuItem onClick={handleClose} onClick={signOut}>Logout</MenuItem>

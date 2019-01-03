@@ -11,6 +11,7 @@ import auth0Client from '../Auth';
 import {Link} from 'react-router-dom';
 import Menu from '../StyleComponent/Menu';
 
+
 const styles = {
   root: {
     flexGrow: 1,
@@ -32,6 +33,7 @@ const linkStyle={
 function ButtonAppBar(props) {
 
   const { classes,signOut } = props;
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -57,7 +59,8 @@ function ButtonAppBar(props) {
                 </Link>
                 <Menu 
                 signOut={signOut}
-                name={auth0Client.getProfile().name}   
+                name={auth0Client.getProfile().name}
+                picture={auth0Client.getProfile().picture}   
                 />
             </div>
           }   

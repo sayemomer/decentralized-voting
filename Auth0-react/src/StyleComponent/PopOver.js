@@ -11,6 +11,10 @@ const styles = theme => ({
   }
 });
 
+const buttons={
+  width:'300px'
+}
+
 class SimplePopover extends React.Component {
   state = {
     anchorEl: null
@@ -44,6 +48,7 @@ class SimplePopover extends React.Component {
           aria-haspopup="true"
           variant="contained"
           onClick={this.handleClick}
+          style={buttons}
         >
           vote !
         </Button>
