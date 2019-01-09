@@ -5,31 +5,17 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
-const mongoose = require('mongoose');
 const randomstring = require('randomstring');
-const Schema = mongoose.Schema
-mongoose.connect('mongodb://dang:dang@ds255715.mlab.com:55715/rockon',{ useNewUrlParser: true });
+const config = require('./config/Db');
+require('dotenv').load();
+const mongoose = require('mongoose');
+mongoose.connect(config.DB,{ useNewUrlParser: true });
 
 
 
 const app = express();
 
-
-var polls = new Schema({
-
-    _id:String,
-    username:String,
-    userId:String,
-    title:String,
-    options:[],
-    vote:[],
-    voted:[]
-
-  });
-
-  
-var Polls = mongoose.model('polls',polls);
-
+let Polls = require('./model/Polls');
 
 app.use(helmet());
 app.use(bodyParser.json());
