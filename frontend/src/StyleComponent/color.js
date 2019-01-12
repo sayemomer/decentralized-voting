@@ -1,13 +1,15 @@
 const color =[
     {
-        "hex": "#EFDECD", 
-        "name": "Almond", 
-        "rgb": "(239, 222, 205)"
+        "hex": "#F78FA7", 
+        "name": "Pink Sherbet", 
+        "rgb": "(247, 143, 167)"
+        
     }, 
     {
-        "hex": "#CD9575", 
-        "name": "Antique Brass", 
-        "rgb": "(205, 149, 117)"
+        "hex": "#C0448F", 
+        "name": "Red Violet", 
+        "rgb": "(192, 68, 143)"
+        
     }, 
     {
         "hex": "#FDD9B5", 
@@ -415,9 +417,9 @@ const color =[
         "rgb": "(252, 116, 253)"
     }, 
     {
-        "hex": "#F78FA7", 
-        "name": "Pink Sherbet", 
-        "rgb": "(247, 143, 167)"
+        "hex": "#EFDECD", 
+        "name": "Almond", 
+        "rgb": "(239, 222, 205)"
     }, 
     {
         "hex": "#8E4585", 
@@ -610,9 +612,9 @@ const color =[
         "rgb": "(50, 74, 178)"
     }, 
     {
-        "hex": "#F75394", 
-        "name": "Violet Red", 
-        "rgb": "(247, 83, 148)"
+        "hex": "#CD9575", 
+        "name": "Antique Brass", 
+        "rgb": "(205, 149, 117)"
     }, 
     {
         "hex": "#FFA089", 
