@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
 import auth0Client from '../Auth';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
@@ -13,27 +9,27 @@ import axios from 'axios';
 import ProgressLine from '../StyleComponent/ProgressLine'
 
 
-const styles = theme => ({
-    container: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    textField: {
-      marginLeft: theme.spacing.unit,
-      marginRight: theme.spacing.unit,
-    },
-    dense: {
-      marginTop: 16,
-    },
-    menu: {
-      width: 200,
-    },
-    root: {
-      ...theme.mixins.gutters(),
-      paddingTop: theme.spacing.unit * 2,
-      paddingBottom: theme.spacing.unit * 2,
-    }
-  });
+// const styles = theme => ({
+//     container: {
+//       display: 'flex',
+//       flexWrap: 'wrap',
+//     },
+//     textField: {
+//       marginLeft: theme.spacing.unit,
+//       marginRight: theme.spacing.unit,
+//     },
+//     dense: {
+//       marginTop: 16,
+//     },
+//     menu: {
+//       width: 200,
+//     },
+//     root: {
+//       ...theme.mixins.gutters(),
+//       paddingTop: theme.spacing.unit * 2,
+//       paddingBottom: theme.spacing.unit * 2,
+//     }
+//   });
 
   const background = {
     width: '90%',
@@ -90,8 +86,9 @@ class NewPoll extends Component {
       for( var i=0 ;i<options.length;i++){
           vote[i]=0;
       }
+      
 
-      await axios.post('http://localhost:8081',
+      await axios.post('http://localhost:8081/',
         {
             username:auth0Client.getProfile().name,
             title:this.state.title,
@@ -109,7 +106,7 @@ class NewPoll extends Component {
 
   
   render() {
-    const { classes } = this.props;
+    // const { classes } = this.props;
     if (!auth0Client.isAuthenticated()) return null;
     return (
       <div>

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
 import auth0Client from '../Auth';
 import Appbar from './Appbar';
-import ListDividers from './ListDividers';
 
 
 

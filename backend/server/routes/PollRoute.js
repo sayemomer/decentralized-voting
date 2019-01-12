@@ -1,21 +1,19 @@
 const express = require('express');
-const app = express();
 const Router = express.Router();
 const randomstring = require('randomstring');
-const checkJwt = require('../auth/auth');
 
 
 
 let Polls = require('../model/Polls');
 
-Router.route('/').get(async (req,res) => {
+Router.get('/',async (req,res) => {
     
     let allPolls= await Polls.find({});
     res.send(allPolls);
   });
   
   
-  Router.route('/:name').get(async (req,res) => {
+  Router.get('/:name',async (req,res) => {
   
       
       let userPolls = await Polls.find({username:req.params.name});
@@ -23,13 +21,15 @@ Router.route('/').get(async (req,res) => {
   });
   
   
-  Router.route('/poll/:id').get(async (req,res) => {
+  Router.get('/poll/:id',async (req,res) => {
   
       let pollDetails =  await Polls.find({_id:req.params.id});
       res.send(pollDetails);
   });
+
+  const checkJwt = require('../auth/auth');
   
-    Router.route('/').post(checkJwt,(req,res) => {
+    Router.post('/',checkJwt,(req,res) => {
   
       const {username,title,options,vote,voted} = req.body;
       const newPoll = {
@@ -49,7 +49,7 @@ Router.route('/').get(async (req,res) => {
   });
   
   
-  Router.route('/poll/:id').post(checkJwt,async(req,res) => {
+  Router.post('/poll/:id',checkJwt,async(req,res) => {
       
       const {vote,voted} = req.body;
       let pollDetails =  await Polls.findByIdAndUpdate({_id:req.params.id},{
@@ -62,7 +62,7 @@ Router.route('/').get(async (req,res) => {
   });
   
   
-  Router.route('/delete/:id').delete(async(req,res) => {
+  Router.delete('/delete/:id',async(req,res) => {
       
        await Polls.findByIdAndRemove({_id:req.params.id});
        res.status(200).send(); 

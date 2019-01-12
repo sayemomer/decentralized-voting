@@ -1,5 +1,6 @@
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
+require('dotenv').load();
 
   const checkJwt = jwt({
   
@@ -7,7 +8,7 @@ const jwksRsa = require('jwks-rsa');
         cache: true,
         rateLimit: true,
         jwksRequestsPerMinute: 5,
-        jwksUri:process.env.AUTH0JWJSURL
+        jwksUri:process.env.AUTH0URL
     }),
 
     audience: process.env.KEY,
@@ -15,4 +16,4 @@ const jwksRsa = require('jwks-rsa');
     algorithms:['RS256']
 })
 
-module.exports =checkJwt;
+module.exports = checkJwt;

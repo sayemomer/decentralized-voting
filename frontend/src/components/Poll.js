@@ -3,7 +3,6 @@ import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import auth0Client from '../Auth';
 import Select from '../StyleComponent/ControlledOpenSelect';
-import PropTypes from 'prop-types';
 import {Doughnut} from 'react-chartjs-2';
 import {withRouter} from 'react-router-dom';
 import {colors} from '../StyleComponent/color';
@@ -46,14 +45,14 @@ const elementTwo = {
 }
 
 
-const styles = theme => ({
-    button: {
-      margin: theme.spacing.unit,
-    },
-    input: {
-      display: 'none',
-    },
-  });
+// const styles = theme => ({
+//     button: {
+//       margin: theme.spacing.unit,
+//     },
+//     input: {
+//       display: 'none',
+//     },
+//   });
 
   const deleteButton= {
       width:'20%',
@@ -167,7 +166,7 @@ class Poll extends Component {
     
     const poll = this.state.poll.map((p)=>(
         
-            <Paper  elevation={1} style={background}>
+            <Paper  elevation={1} style={background} key={p.id}>
                 
                 <div style={elementOne}>
                 <h1>{p.title}</h1>
@@ -220,8 +219,6 @@ class Poll extends Component {
             
             </Paper>
       ));
-
-    const { classes } = this.props;
 
     return (
         <div >

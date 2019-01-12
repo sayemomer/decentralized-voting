@@ -33,7 +33,7 @@ function RenderPropsMenu(props) {
               <Avatar alt="Profile Picture" src={picture} />
             </Button>
             <Menu id="render-props-menu" anchorEl={anchorEl} open={open} onClose={handleClose}>
-              <MenuItem onClick={handleClose} onClick={signOut}>Logout</MenuItem>
+              <MenuItem  onClick={signOut}>Logout</MenuItem>
             </Menu>
           </React.Fragment>
         );
