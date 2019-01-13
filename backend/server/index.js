@@ -27,5 +27,6 @@ app.use(PollRouter)
 app.listen(port,() => {
 
     console.log("listening on port "+port);
-    console.log(process.env.KEY)
 })
+
+module.exports = app;
