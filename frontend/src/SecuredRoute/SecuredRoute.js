@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {Route} from 'react-router-dom';
-import auth0Client from '../Auth';
-
-
+import auth0Client from '../auth/Auth';
 
 class SecuredRoute extends Component {
 

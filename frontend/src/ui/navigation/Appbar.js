@@ -5,9 +5,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import auth0Client from '../Auth';
+import auth0Client from '../../auth/Auth';
 import {Link} from 'react-router-dom';
-import Menu from '../StyleComponent/Menu';
+import Menu from './Menu';
 
 
 

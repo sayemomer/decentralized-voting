@@ -8,8 +8,8 @@ import Divider from '@material-ui/core/Divider';
 import { Component } from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-import auth0Client from '../Auth';
-import ProgressBar from '../StyleComponent/ProgressBar';
+import auth0Client from '../auth/Auth';
+import ProgressBar from '../ui/ProgressBar';
 import Paper from '@material-ui/core/Paper';
 
 const styles = theme => ({

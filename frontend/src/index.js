@@ -1,16 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter as Router} from 'react-router-dom';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import Redux from './Redux/main';
+import fetchAllPolls from './Redux/actions/index';
 
+const store = createStore(Redux.reducer, applyMiddleware(thunk));
+
+store.dispatch(fetchAllPolls());
 
 
 ReactDOM.render(
-    <Router>
-        <App />
+    <Router> 
+        <Provider store={store}>
+            <App />
+        </Provider>
     </Router>
+    
 ,document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

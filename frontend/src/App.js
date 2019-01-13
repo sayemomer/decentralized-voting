@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import {Route,withRouter} from 'react-router-dom';
 import Polls from './components/Polls';
 import poll from './components/Poll';
-import Navbar from './components/Navbar';
+import Navbar from './components/container/Navbar';
 import CallBack from './components/Callback';
 import MyPolls from './components/Mypolls';
 import NewPoll from './components/NewPoll';
 import SecuredRoute from './SecuredRoute/SecuredRoute';
-import auth0Client from './Auth';
-
+import auth0Client from './auth/Auth';
 
 
 class App extends Component {
@@ -22,6 +21,7 @@ class App extends Component {
   }
 
   async componentDidMount() {
+
     if (this.props.location.pathname === '/callback'){
       this.setState({checkingSession:false});
       return;
@@ -33,13 +33,15 @@ class App extends Component {
       if (err.error !== 'login_required') console.log(err.error);
     }
     this.setState({checkingSession:false});
+    
   }
 
   render() {
+
     return (
       <div>
         <Navbar/>
-        <Route exact path='/' component={Polls}/>
+        <Route exact path='/' component={Polls} />
         <Route exact path='/poll/:id' component={poll} checkingSession={this.state.checkingSession}/>
         <Route exact path='/callback' component={CallBack}/>
         <SecuredRoute path='/mypolls' component={MyPolls} checkingSession={this.state.checkingSession}/>

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
-import auth0Client from '../Auth';
+import auth0Client from '../auth/Auth';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
-import ProgressLine from '../StyleComponent/ProgressLine'
+import ProgressLine from '../ui/ProgressLine'
 
 
 // const styles = theme => ({
