@@ -88,32 +88,25 @@ class Poll extends Component {
         .catch((error)=>console.log(error))  
     }
 
-    async onVote(vote){
+    async onVote(choice){
 
-        var options = this.state.poll.map((p)=>{ return [...p.options] });
-        var votes = this.state.poll.map((p)=>{ return [...p.vote] });
-        var voted = this.state.poll.map((p)=>{ return [...p.voted] });
-        var user = auth0Client.getProfile().name;
-
-        const alreadyVoted = _.findIndex(voted[0],{casted : `${user}`});
+        const {poll} = this.state;
+        let {options,vote,voted}= poll[0]; // how many options in poll ,exm ["yes","no"]// votes on those options ,exm [0,0] 
+        var user = auth0Client.getProfile().name; 
+        const alreadyVoted = _.findIndex(voted[0],{casted : `${user}`}); //checking the current user already there or not 
 
         if(alreadyVoted >= 1){
             this.setState({alert:true})
         }else{
-            let index =options[0].indexOf(vote);
-
-            var voteCast = votes[0];
-    
-            voteCast[index]=voteCast[index]+1;
-    
-            console.log(voteCast);
-    
+            
+            let index =options.indexOf(choice); // 1st get the index of the vote user given
+            var voteCast = vote; // gets the total number of vote ,exm [0,0]
+            voteCast[index]++; // increment the number of vote 
             const { match: { params } } = this.props;
-        
             await axios.post(`http://localhost:8081/poll/${params.id}`,
             {
                vote:voteCast,
-               voted:voted[0].concat({casted : `${user}`})
+               voted:[...voted,{casted : `${user}`}]
             },
             {
                 headers: { 'Authorization': `Bearer ${auth0Client.getIdToken()}` }
