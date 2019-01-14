@@ -43,7 +43,7 @@ class Listed extends Component {
 
     
      render(){
-     const {polls,isFectching} = this.props;
+     const {polls,isFectching,myPoll} = this.props;
 
      console.log(polls)
 
@@ -52,7 +52,7 @@ class Listed extends Component {
             <div key={p._id}>
               <Link to={`/poll/${p._id}`} style={linkStyle}>
                 <ListItem button divider >
-                <ListItemText primary={p.title}  />
+                  <ListItemText primary={p.title}  />
                 </ListItem>
               </Link>
               <Divider /> 
@@ -62,23 +62,29 @@ class Listed extends Component {
 
 
         return (
-            <div  >
             <Paper  elevation={1} style={background}>
-            <div style={intro}>
-            <h2>Below are polls hosted by fcc-voting.</h2>
-            <h3>Select a poll to see the results and vote, or sign-in to make a new poll.</h3>
-            </div> 
-          <List component="nav" style={textStyle}  >
-          {
+            {
+              myPoll === true &&
+              <div style={intro}>
+                <h3>Below are polls you own.</h3>
+                <h3>Select a poll to see the results and vote,<Link to='/newpoll'>or make a new poll!</Link> </h3>
+              </div>
+            }
+            {
+              myPoll === false &&
+              <div style={intro}>
+                <h2>Below are polls hosted by fcc-voting.</h2>
+                <h3>Select a poll to see the results and vote, or sign-in to make a new poll.</h3>
+              </div>
+            }
+            <List component="nav" style={textStyle}  >
+            {
             isFectching === false &&
             <ProgressBar/> 
-          }
-          {allPolls}  
-        </List>
-        </Paper>
-
-            </div>
-
+            }
+            {allPolls}  
+            </List>
+            </Paper>
           );
 
      }

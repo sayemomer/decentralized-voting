@@ -1,9 +1,11 @@
 import {createStore,combineReducers} from 'redux';
 import fetchReducer from './reducers/fetchPolls';
+import { connectRouter } from 'connected-react-router';
 
 
 
-const reducer = combineReducers({
+const reducer =(history)=> combineReducers({
+  router: connectRouter(history),
   polls : fetchReducer
 });
 

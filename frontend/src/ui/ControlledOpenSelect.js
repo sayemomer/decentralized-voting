@@ -6,7 +6,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
-import PopOverButton from './PopOver'
+import PopOverButton from './PopOver';
+import auth0Client from '../auth/Auth';
 
 const styles = theme => ({
   button: {
@@ -38,14 +39,17 @@ class ControlledOpenSelect extends React.Component {
   };
 
   handleSubmit = () => {
-    this.props.onVote(this.state.poll);
+    const header ={
+      headers: { 'Authorization': `Bearer ${auth0Client.getIdToken()}` }
+  }
+    this.props.onVote(this.state.poll,header);
   }
 
   render() {
     const { classes } = this.props;
 
   const options=  this.props.options.map((op)=>(
-          <MenuItem value={op} >{op}</MenuItem>     
+          <MenuItem value={op} key={op} >{op}</MenuItem>     
     ));
 
     return (

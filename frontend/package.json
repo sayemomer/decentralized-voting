@@ -8,6 +8,8 @@
     "auth0-js": "^9.8.2",
     "axios": "^0.18.0",
     "chart.js": "^2.7.3",
+    "connected-react-router": "^6.2.1",
+    "history": "^4.7.2",
     "lodash": "^4.17.11",
     "react": "^16.7.0",
     "react-chartjs-2": "^2.7.4",

@@ -3,21 +3,31 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter as Router} from 'react-router-dom';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware ,compose } from 'redux';
+import { routerMiddleware } from 'connected-react-router';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import Redux from './Redux/main';
-import fetchAllPolls from './Redux/actions/index';
+import action from './Redux/actions/index';
+import { createBrowserHistory } from 'history';
+import { ConnectedRouter } from 'connected-react-router';
+const history = createBrowserHistory()
 
-const store = createStore(Redux.reducer, applyMiddleware(thunk));
+const store = createStore(
+    Redux.reducer(history),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    compose(applyMiddleware(routerMiddleware(history),thunk)),
+    );
 
-store.dispatch(fetchAllPolls());
+store.dispatch(action.fetchAllPolls());
 
 
 ReactDOM.render(
     <Router> 
         <Provider store={store}>
+        <ConnectedRouter history={history}>
             <App />
+        </ConnectedRouter>
         </Provider>
     </Router>
     

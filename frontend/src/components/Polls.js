@@ -5,7 +5,7 @@ import List from '../ui/list/List';
 function Polls({polls,isFectching}) {
 
   return (
-      <List polls={polls} isFectching={isFectching} />
+      <List polls={polls} isFectching={isFectching} myPoll={false} />
   );
 
 }

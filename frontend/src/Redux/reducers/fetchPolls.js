@@ -7,6 +7,18 @@ const fetchReducer = (state = {isFectching : false , polls :[]}, action) => {
                 isFectching : true,
                 polls: action.data
             }
+        case 'ADD_POLL':
+
+            return{
+                isFectching : true,
+                polls: [...state.polls,action.payload]
+            }
+        case 'VOTE':
+        
+            return{
+                isFectching : true,
+                polls: [...state.polls,action.payload]
+            }
         default:
         return state;
     }
