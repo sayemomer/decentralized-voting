@@ -12,15 +12,6 @@ Router.get('/',async (req,res) => {
     res.send(allPolls);
   });
   
-  
-  Router.get('/:name',async (req,res) => {
-  
-      
-      let userPolls = await Polls.find({username:req.params.name});
-      res.send(userPolls);
-  });
-  
-  
   Router.get('/poll/:id',async (req,res) => {
   
       let pollDetails =  await Polls.find({_id:req.params.id});
@@ -45,20 +36,20 @@ Router.get('/',async (req,res) => {
       };
       var poll = new Polls(newPoll);
       poll.save();
-      res.status(200).send();
+      res.status(200).send(poll);
   });
   
   
   Router.post('/poll/:id',checkJwt,async(req,res) => {
       
       const {vote,voted} = req.body;
-      let pollDetails =  await Polls.findByIdAndUpdate({_id:req.params.id},{
+      let poll =  await Polls.findByIdAndUpdate({_id:req.params.id},{
   
           vote,
           voted
           
       });
-      res.send(pollDetails);
+      res.status(200).send(poll);
   });
   
   
