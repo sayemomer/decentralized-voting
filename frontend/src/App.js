@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {Route,withRouter} from 'react-router-dom';
-import Polls from './components/Polls';
-import poll from './components/Poll';
-import Navbar from './components/container/Navbar';
+import Polls from './container/Polls';
+import poll from './container/Poll';
+import Navbar from './container/Navbar';
 import CallBack from './components/Callback';
-import MyPolls from './components/Mypolls';
-import NewPoll from './components/NewPoll';
+import MyPolls from './container/Mypolls';
+import NewPoll from './container/NewPoll';
 import SecuredRoute from './SecuredRoute/SecuredRoute';
 import auth0Client from './auth/Auth';
 

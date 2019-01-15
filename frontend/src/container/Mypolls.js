@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import List from '../ui/list/List';
+import List from '../components/list/List';
 import auth0Client from '../auth/Auth';
 
 function MyPolls({polls,isFectching}) {

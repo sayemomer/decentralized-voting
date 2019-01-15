@@ -11,7 +11,10 @@ import Redux from './Redux/main';
 import action from './Redux/actions/index';
 import { createBrowserHistory } from 'history';
 import { ConnectedRouter } from 'connected-react-router';
-const history = createBrowserHistory()
+const history = createBrowserHistory();
+
+//TODO: Study- 1.how many dispatch can be in mapDispatchProps 
+//FIXME: why the init store loads 3 time ?
 
 const store = createStore(
     Redux.reducer(history),

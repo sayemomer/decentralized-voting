@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Form from '../ui/form/Form';
+import Form from '../components/form/Form';
 import action from '../Redux/actions/index'
 
 const mapDispatchToFormProps = (dispatch) => (

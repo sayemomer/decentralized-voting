@@ -2,6 +2,10 @@ import axios from 'axios';
 const getApiUrl ='http://localhost:8081/';
 const postApiUrl ='http://localhost:8081/';
 
+/*
+TODO: split async function and pure actions
+ */
+
 const fetchPolls = (polls) => {
     return {
       type: 'FETCH_POLLS',
@@ -47,7 +51,7 @@ const fetchPolls = (polls) => {
     return (dispatch) => {
       return axios.post(`http://localhost:8081/poll/${id}`, data ,header)
         .then(response => {
-          dispatch(voteSuccess(response.data))
+          dispatch(voteSuccess(data,id))
         })
         .catch(error => {
           throw(error);
@@ -55,13 +59,35 @@ const fetchPolls = (polls) => {
     };
   };
   
-   const voteSuccess =  (data) => {
+   const voteSuccess =  (data,id) => {
     return {
       type: "VOTE",
-      payload: data
+      payload: data,
+      id:id 
     }
   };
 
-  const action ={ createPoll,fetchAllPolls ,vote};
+
+  
+  const deletePoll = (id) => {
+    return (dispatch) => {
+      return axios.delete(`http://localhost:8081/delete/${id}`)
+        .then(response => {
+          dispatch(deleteSuccess(id))
+        })
+        .catch(error => {
+          throw(error);
+        });
+    };
+  };
+  
+   const deleteSuccess =  (id) => {
+    return {
+      type: "DELETE_POLL",
+      payload: id
+    }
+  };
+
+  const action ={ createPoll,fetchAllPolls ,vote , deletePoll};
 
   export default action;

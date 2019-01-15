@@ -12,15 +12,10 @@ Router.get('/',async (req,res) => {
     res.send(allPolls);
   });
   
-  Router.get('/poll/:id',async (req,res) => {
-  
-      let pollDetails =  await Polls.find({_id:req.params.id});
-      res.send(pollDetails);
-  });
 
-  const checkJwt = require('../auth/auth');
+const checkJwt = require('../auth/auth');
   
-    Router.post('/',checkJwt,(req,res) => {
+Router.post('/',checkJwt,(req,res) => {
   
       const {username,title,options,vote,voted} = req.body;
       const newPoll = {
@@ -40,7 +35,7 @@ Router.get('/',async (req,res) => {
   });
   
   
-  Router.post('/poll/:id',checkJwt,async(req,res) => {
+Router.post('/poll/:id',checkJwt,async(req,res) => {
       
       const {vote,voted} = req.body;
       let poll =  await Polls.findByIdAndUpdate({_id:req.params.id},{
@@ -53,14 +48,14 @@ Router.get('/',async (req,res) => {
   });
   
   
-  Router.delete('/delete/:id',async(req,res) => {
+Router.delete('/delete/:id',async(req,res) => {
       
-       await Polls.findByIdAndRemove({_id:req.params.id});
-       res.status(200).send(); 
+    let poll = await Polls.findByIdAndRemove({_id:req.params.id});
+    res.status(200).send(poll); 
   });
   
 
-  module.exports = Router
+module.exports = Router
   
 
 

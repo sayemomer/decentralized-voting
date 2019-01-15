@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import {Doughnut} from 'react-chartjs-2';
 import {withRouter} from 'react-router-dom';
-import Select from '../ControlledOpenSelect';
+import Select from './ControlledOpenSelect';
 import {FacebookShareButton,TwitterShareButton} from 'react-share';
 import {FacebookIcon,TwitterIcon} from 'react-share';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -49,6 +49,13 @@ const elementTwo = {
 
 class Board extends Component {
 
+    handleDelete = (id) =>{
+        this.props.onDelete(id);
+        this.props.history.push('/');
+    }
+
+
+
   render() {
       
     const shareUrl = window.location.href;
@@ -87,9 +94,9 @@ class Board extends Component {
                 height={150}
                 />
                 
-            <Button variant="contained" color="secondary" style={deleteButton} onClick={this.handleDelete} >
-                Delete
-                <DeleteIcon  />
+            <Button variant="contained" color="secondary" style={deleteButton} onClick={()=>this.handleDelete(p._id)} >
+            Delete
+            <DeleteIcon  />
             </Button>
 
             </div>
