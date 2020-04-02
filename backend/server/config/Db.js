@@ -1,5 +1,5 @@
 require('dotenv').load();
 
 module.exports = {
-    DB:process.env.MLAB_URI
+    DB:process.env.MONGO_HOST
 }
