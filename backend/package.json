@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon node server",
+    "start": "nodemon node index",
     "test": "mocha --timeout 10000 --exit && npm start"
   },
   "keywords": [],
@@ -22,12 +22,12 @@
     "mongodb": "^3.5.5",
     "mongoose": "^5.9.7",
     "morgan": "^1.9.1",
-    "nodemon": "^1.18.9",
     "randomstring": "^1.1.5"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-http": "^4.2.1",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.9"
   }
 }

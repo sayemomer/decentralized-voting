@@ -1,11 +1,12 @@
-FROM node:latest
+# Specify a base image
+FROM node:alpine
 
-WORKDIR /server/index
+WORKDIR /usr/src/app
 
-COPY . .
-
+# Install some depenendencies
+COPY ./package.json ./
 RUN npm install
+COPY ./ ./
 
-EXPOSE 4044
-
-ENTRYPOINT ["npm", "start"]
+# Default command
+CMD ["npm", "start"]
