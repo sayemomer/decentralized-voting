@@ -1,10 +1,10 @@
 let mongoose = require("mongoose");
-let Poll = require('../server/model/Polls');
+let Poll = require('./poll.model');
 
 //Require the dev-dependencies
 let chai = require('chai');
 let chaiHttp = require('chai-http');
-let server = require('../server/index');
+let server = require('../../index');
 let should = chai.should();
 
 
