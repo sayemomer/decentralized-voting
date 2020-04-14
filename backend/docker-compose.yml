@@ -1,14 +1,14 @@
-version: '3.4'
+version: "3.4"
 services:
   voting:
     build: .
-    ports: 
+    ports:
       - "4044:4044"
     restart: always
     depends_on:
       - mongo
   mongo:
     image: mongo
-    ports: 
+    ports:
       - "27018:27017"
     restart: always
