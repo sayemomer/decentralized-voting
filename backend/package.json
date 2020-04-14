@@ -2,33 +2,23 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "build/index.ts",
   "scripts": {
-    "build": "tsc",
-    "start": "node -r ./tsconfig-paths-bootstrap.js .",
-    "start:dev": "node -r dotenv/config -r tsconfig-paths/register -r ts-node/register index.ts",
-    "dev": "nodemon",
-    "test:unit": "mocha --recursive -r tsconfig-paths/register -r ts-node/register -r source-map-support/register src/**/*.spec.ts",
+    "start": "npm run build && npm run serve",
+    "serve": "node -r dotenv/config build/index.js",
+    "build": "npm run build-ts",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
+    "watch-node": "nodemon -r dotenv/config index.ts",
+    "build-ts": "tsc",
+    "watch-ts": "tsc -w",
     "test:lint": "eslint --ext .ts ./src",
-    "test:lint:fix": "npm run test:lint -- --fix",
-    "test": "npm run test:lint && npm run test:unit"
-  },
-  "nodemonConfig": {
-    "ignore": [
-      "**/*.spec.ts",
-      ".git",
-      "node_modules"
-    ],
-    "watch": [
-      "index.ts"
-    ],
-    "exec": "npm run start:dev",
-    "ext": "ts"
+    "test": "jest --forceExit --detectOpenHandles --coverage --verbose"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "@types/randomstring": "^1.1.6",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -44,6 +34,7 @@
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.30",
+    "@types/hapi__joi": "^16.0.12",
     "@types/body-parser": "^1.19.0",
     "@types/chai": "^4.2.11",
     "@types/cors": "^2.8.6",
