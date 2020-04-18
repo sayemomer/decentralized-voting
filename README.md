@@ -1,4 +1,16 @@
-# node-react-voting
-A fullStack voting app baked on react,node and friends
+# decentralized-voting
+A voting app baked on 
+
+
+![](images/react.svg.png)
+![](images/node.png)
+![](images/express.png)
+![](images/typescript.png)
+![](images/material.png)
+![](images/docker.png)
+![](images/docker-compose.jpg)
+
+
+# demo 
 
 ![](images/intro.PNG)

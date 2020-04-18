@@ -1,6 +1,11 @@
+logs
+*.log
+npm-debug.log*
+pids
+*.pid
+*.seed
+*.pid.lock
 node_modules
-build
-npm-debug.log
+*.tsbuildinfo
 .env
-.DS_Store
-package-lock.json
+build
