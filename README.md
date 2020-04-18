@@ -1,5 +1,5 @@
-# node-react-voting
-A fullStack voting app baked on 
+# decentralized-voting
+A voting app baked on 
 
 
 ![](images/react.svg.png)
