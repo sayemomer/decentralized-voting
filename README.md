@@ -9,6 +9,8 @@ A voting app baked on
 ![](images/material.png)
 ![](images/docker.png)
 ![](images/docker-compose.jpg)
+![](images/nginx.png)
+![](images/travis.png)
 
 
 # demo 
