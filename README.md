@@ -5,6 +5,7 @@ A voting app baked on web technogies
 ![](images/express.webp)
 ![](images/react.png)
 ![](images/typescript.png)
+![](images/mongodb.png)
 ![](images/docker.webp)
 ![](images/docker-compose.jpg)
 ![](images/nginx.png)
