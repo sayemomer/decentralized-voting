@@ -1,9 +1,0 @@
-sudo: required
-services:
-  - docker
-
-before_install:
-  - docker build -t decentralized-voting/frontend -f Dockerfile.dev  /decentralized-voting/frontend/.
-
-script:
-  - docker run decentralized-voting/frontend npm run test -- --coverage
