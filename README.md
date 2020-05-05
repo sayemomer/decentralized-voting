@@ -1,5 +1,5 @@
 # decentralized-voting
-A voting app baked on 
+A voting app baked on web technogies
 
 ![](images/node.png)
 ![](images/express.webp)
